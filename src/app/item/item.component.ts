@@ -1,11 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Item } from '../item';
-
+import {FormsModule} from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   standalone: true,
   selector: 'app-item',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, MatCheckboxModule, MatInputModule, MatFormFieldModule],
   templateUrl: './item.component.html',
   styleUrls:  ['./item.component.css' ]
 })

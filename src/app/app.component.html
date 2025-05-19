@@ -1,18 +1,37 @@
 <!-- src/app/app.component.html -->
+<!-- import {MatInputModule} from '@angular/material/input'; -->
+
 <div class="main">
   <h1>{{ componentTitle }}</h1>
   <h2>What would you like to do today?</h2>
 
-  <input
+  <!-- <input
     #newItem
+    matInput
     placeholder="Add an item"
     class="lg-text-input"
     id="addItemInput"
     (keyup.enter)="addItem(newItem.value); newItem.value = ''"
-  />
-  <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+  /> -->
+  <mat-form-field class="example-full-width">
+    <mat-label>Add an item</mat-label>
+    <input
+      #newItem
+      matInput
+      value=""
+      class="lg-text-input"
+      id="addItemInput"
+      (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+    />
+  </mat-form-field>
+  <!-- <button class="btn-primary" (click)="addItem(newItem.value)">Add</button> -->
+  <section>
+    <div class="example-button-row" (click)="addItem(newItem.value)">
+      <button mat-button>Add</button>
+    </div>
+  </section>
   <div class="btn-wrapper">
-    <button
+    <!-- <button
       class="btn btn-menu"
       [class.active]="filter == 'all'"
       (click)="filter = 'all'"
@@ -32,8 +51,35 @@
       (click)="filter = 'done'"
     >
       Done
-    </button>
+    </button> -->
   </div>
+
+  <section>
+    <mat-button-toggle-group
+      name="favoriteColor"
+      aria-label="Favorite Color"
+      [hideSingleSelectionIndicator]="hideSingleSelectionIndicator()"
+    >
+      <mat-button-toggle
+        value="red"
+        [class.active]="filter == 'all'"
+        (click)="filter = 'all'"
+        >All</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="green"
+        [class.active]="filter == 'active'"
+        (click)="filter = 'active'"
+        >To-do</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="blue"
+        [class.active]="filter == 'done'"
+        (click)="filter = 'done'"
+        >Done</mat-button-toggle
+      >
+    </mat-button-toggle-group>
+  </section>
 
   <h2>
     {{ items.length }}

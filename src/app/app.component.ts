@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter , signal, ChangeDetectionStrategy} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Item } from './item';
 import { ItemComponent } from './item/item.component';
-
-
+import {MatInputModule} from '@angular/material/input';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [CommonModule, ItemComponent],
+  imports: [CommonModule, ItemComponent, MatInputModule, MatIconModule, MatDividerModule, MatButtonModule, MatButtonToggleModule, MatCheckboxModule],
   styleUrl: './app.component.css',
   templateUrl: "./app.component.html",
 })
@@ -49,4 +53,20 @@ export class AppComponent {
   trackByDescription(_: number, itm: Item) {
     return itm.description;
   }
+
+
+
+
+  hideSingleSelectionIndicator = signal(false);
+  hideMultipleSelectionIndicator = signal(false);
+
+  toggleSingleSelectionIndicator() {
+    this.hideSingleSelectionIndicator.update(value => !value);
+  }
+
+  toggleMultipleSelectionIndicator() {
+    this.hideMultipleSelectionIndicator.update(value => !value);
+  }
+
+
 }
