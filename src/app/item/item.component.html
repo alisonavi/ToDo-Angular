@@ -1,0 +1,31 @@
+<!-- src/app/item/item.component.html -->
+<div class="item" *ngIf="item">
+  <input
+    [id]="item.description"
+    type="checkbox"
+    [checked]="item.done"
+    (change)="item.done = !item.done"
+  />
+  <label [for]="item.description">{{ item.description }}</label>
+
+  <div *ngIf="!editable" class="btn-wrapper">
+    <button class="btn" (click)="editable = true">Edit</button>
+    <button class="btn btn-warn" (click)="remove.emit(item)">Delete</button>
+  </div>
+
+  <div *ngIf="editable">
+    <input
+      class="sm-text-input"
+      placeholder="edit item"
+      [value]="item.description"
+      #editedItem
+      (keyup.enter)="saveItem(editedItem.value)"
+    />
+    <div class="btn-wrapper">
+      <button class="btn" (click)="editable = false">Cancel</button>
+      <button class="btn btn-save" (click)="saveItem(editedItem.value)">
+        Save
+      </button>
+    </div>
+  </div>
+</div>

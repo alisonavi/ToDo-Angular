@@ -1,0 +1,25 @@
+<!-- src/app/app.component.html -->
+<div class="main">
+  <h1>{{ componentTitle }}</h1>
+  <h2>What would you like to do today?</h2>
+
+  <input
+    #newItem
+    placeholder="Add an item"
+    class="lg-text-input"
+    id="addItemInput"
+    (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+  />
+  <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+
+  <h2>
+    {{ items.length }}
+    {{ items.length === 1 ? 'item' : 'items' }}
+  </h2>
+
+  <ul>
+    <li *ngFor="let item of items; trackBy: trackByDescription">
+      <app-item [item]="item" (remove)="remove($event)"></app-item>
+    </li>
+  </ul>
+</div>
